@@ -5,7 +5,7 @@ from dataclasses import dataclass
 from src.exception import CustomException
 from src.logger import logging
 from sklearn.model_selection import train_test_split
-from src.components.data_transform import DataTranformation
+from src.components.data_transform import DataTransformation
 
 
 ##initialize the data ingestion congration
@@ -19,6 +19,7 @@ class DataIngestionconfig:
 class DataIngestion:
     def __init__(self):
         self.ingestion_config=DataIngestionconfig()
+    
 
     
     def initiate_data_ingestion(self):
@@ -84,7 +85,8 @@ class DataIngestion:
             #we need to drop order_picked_time column
             df.drop(labels=["Time_Order_picked"],axis=1,inplace=True)
             logging.info(f"time columns also getting converted into float: \n {df.head().to_string()}")
-            df["Festival"]=df["Festival"].map({'No':0, 'Yes':1,"nan":0})
+            
+            
 
             logging.info("Train Test Split")
             train_set,test_set=train_test_split(df,test_size=0.30,random_state=42)
@@ -104,13 +106,7 @@ class DataIngestion:
             raise CustomException(e,sys)
         
 
-#run data ingestion
-
-if __name__=="__main__":
-    obj=DataIngestion()
-    train_data,test_data=obj.initiate_data_ingestion()
-    data_transforms=DataTranformation()
-    train_arr,test_arr,_=data_transforms.initiate_data_transformation(train_data,test_data)
+   
 
 
 
