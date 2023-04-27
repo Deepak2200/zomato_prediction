@@ -21,6 +21,7 @@ class PredictPipeline:
             data_scaled=preprocessor.transform(features)
 
             pred=model.predict(data_scaled)
+            
             return pred
             
 
@@ -74,7 +75,7 @@ class CustomData:
         
     def get_data_as_dataframe(self):
         try:
-            custom_data_input_dict = {
+            custom_data_input_dict ={
                 'Delivery_person_Age':[self.Delivery_person_Age],
                 "Delivery_person_Ratings":[self.Delivery_person_Ratings],
                 "Restaurant_latitude":[self.Restaurant_latitude],
@@ -95,10 +96,10 @@ class CustomData:
                 "order_min":[self.order_min],
                 "picked_hours":[self.picked_hours],
                 "picked_min":[self.picked_min]
-
                 
                 
             }
+    
             df = pd.DataFrame(custom_data_input_dict)
             logging.info('Dataframe Gathered')
             return df
